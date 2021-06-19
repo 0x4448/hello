@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "hello"
+version = "0.1.0"
+description = ""
+authors = ["0x4448"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Flask = "^2.0.1"
+gunicorn = "^20.1.0"
+
+[tool.poetry.dev-dependencies]
+black = "^21.6b0"
+flake8 = "^3.9.2"
+pre-commit = "^2.13.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
