@@ -30,5 +30,5 @@ FROM base AS final
 
 COPY --from=builder /requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-COPY hello.py hello.py
-CMD gunicorn --bind 0.0.0.0:8000 hello:app
+COPY hello/ .
+ENTRYPOINT /app/docker-entrypoint.sh
