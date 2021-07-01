@@ -13,3 +13,9 @@ def index():
         "hostname": platform.node(),
     }
     return jsonify(response)
+
+
+@app.route("/ready")
+@app.route("/startup")
+def startup():
+    return jsonify({})
