@@ -3,19 +3,12 @@ import os
 import platform
 import random
 
-from flask import Flask, abort, jsonify, request
+from flask import Blueprint, abort, jsonify, request
 
-app = Flask(__name__)
-
-
-# Error handlers
-@app.errorhandler(500)
-def internal_server_error(e):
-    return jsonify(error=str(e)), 500
+bp = Blueprint("hello", __name__, url_prefix="/")
 
 
-# Views
-@app.route("/")
+@bp.route("/")
 def index():
     # Return 500 occasionally if environment variable ERROR_RATE is defined.
     try:
@@ -30,9 +23,3 @@ def index():
         "hostname": platform.node(),
     }
     return jsonify(response)
-
-
-@app.route("/ready")
-@app.route("/startup")
-def startup():
-    return jsonify({})
