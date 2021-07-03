@@ -30,5 +30,6 @@ FROM base AS final
 
 COPY --from=builder /requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-COPY hello/ .
-ENTRYPOINT [ "/app/docker-entrypoint.sh" ]
+COPY docker-entrypoint.sh .
+COPY hello ./hello
+CMD [ "/app/docker-entrypoint.sh" ]

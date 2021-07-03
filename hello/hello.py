@@ -23,3 +23,8 @@ def index():
         "hostname": platform.node(),
     }
     return jsonify(response)
+
+
+@bp.route("/env")
+def env():
+    return jsonify(dict(os.environ))
