@@ -7,6 +7,9 @@ from flask import Blueprint, abort, jsonify, request
 
 bp = Blueprint("hello", __name__, url_prefix="/")
 
+# View counter for index
+index_counter = 0
+
 
 @bp.route("/")
 def index():
@@ -18,9 +21,22 @@ def index():
         # Ignore invalid values for ERROR_RATE.
         pass
 
+    # Increment view counter
+    global index_counter
+    index_counter += 1
+
+    # Return 500 if counter exceeds environment variable LIMIT.
+    try:
+        if index_counter > int(os.environ.get("LIMIT", "")):
+            abort(500, description="limit exceeded")
+    except ValueError:
+        # Ignore invalid values for LIMIT
+        pass
+
     response = {
         "client_ip": request.remote_addr,
         "hostname": platform.node(),
+        "counter": index_counter,
     }
     return jsonify(response)
 
