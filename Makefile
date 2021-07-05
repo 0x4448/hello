@@ -1,6 +1,8 @@
 define HELP
 make build: build the image
-make test: test the image
+make pytest: run unit tests
+make rm: delete container
+make run: run container
 endef
 
 export HELP
@@ -12,8 +14,8 @@ build:
 	docker build --tag 0x4448/hello:dev .
 
 pytest:
-	@coverage run -m pytest
-	@coverage report -m
+	coverage run -m pytest
+	coverage report -m
 
 rm:
 	docker ps --filter name=hello -aq | xargs docker rm -f
