@@ -13,6 +13,9 @@ help:
 build:
 	docker build --tag 0x4448/hello:dev .
 
+functest:
+	tests/functest.sh
+
 pytest:
 	coverage run -m pytest
 	coverage report -m
